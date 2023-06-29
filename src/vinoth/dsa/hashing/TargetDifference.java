@@ -1,5 +1,6 @@
 package vinoth.dsa.hashing;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,6 +40,72 @@ public class TargetDifference {
         return false;
     }
 
+    public static int diffPair(int[] arr, int k) {
+        int N = arr.length;
+        long sum = 0;
+        int count = 0;
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        hashMap.put(0, 1);
+        for (int i = 0; i < N; i++) {
+            sum = sum + arr[i];
+            if (hashMap.containsKey(arr[i] - k)) {
+                count++;
+            }
+            if (hashMap.containsKey(arr[i])) {
+                Integer integer = hashMap.get(arr[i]);
+                hashMap.put(arr[i], integer++);
+            } else {
+                hashMap.put(arr[i], 1);
+            }
+        }
+        return count;
+    }
+
+    public int solveSolution(int[] A, int B) {
+        int N = A.length;
+        int modulus = 1000000000 + 7;
+        int count = 0;
+        HashMap<Integer, Integer> hm = new HashMap<>();
+        // First Case:   A[i] - A[j] = B => A[j] = A[i] -B
+        // Second Case:  A[i] - A[j] = B => A[i] = B + A[j]
+        for (int i = 0; i < N; i++) {
+            int x = A[i] - B;
+            int y = B + A[i];
+
+            if (hm.containsKey(x)) {
+                count = count + hm.get(x);
+            }
+            if (hm.containsKey(y)) {
+                count = count + hm.get(y);
+            }
+
+            // Insert A[i]
+            if (hm.containsKey(A[i])) {
+                int value = hm.get(A[i]);
+                hm.put(A[i], value + 1);
+            } else {
+                hm.put(A[i], 1);
+            }
+        }
+        return (int) (count % modulus);
+    }
+
+    public static int solution(int[] A, int B) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int count = 0;
+        for (int val : A) {
+            if (map.containsKey(val - B))
+                count = count + map.get(val - B);
+            if (map.containsKey(val + B))
+                count = count + map.get(val + B);
+            if (map.containsKey(val))
+                map.put(val, map.get(val) + 1);
+            else
+                map.put(val, 1);
+        }
+        return count % 1000000007;
+    }
+
     private static boolean targetDiffHashSet(int[] arr, int k) {
         int N = arr.length;
         Set<Integer> hashSet = new HashSet<>();
@@ -61,4 +128,6 @@ public class TargetDifference {
         }
         return 0;
     }
+
+
 }
