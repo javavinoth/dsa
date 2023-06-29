@@ -5,7 +5,7 @@ package vinoth.dsa.prefixsum;
  */
 public class EquilibriumIndex {
     public static void main(String[] args) {
-        int[] arr = {100, 200, 5, 300};
+        int[] arr = {1, 2, 3, 7, 1, 2, 3};
         System.out.println(count(arr));
     }
 
@@ -13,16 +13,19 @@ public class EquilibriumIndex {
         long[] prefixSum = PrefixSum.prefixSum(arr);
         int N = arr.length;
         int count = 0;
-        long left = 0;
         for (int i = 0; i < N; i++) {
+            long left,right;
             if (i == 0) {
                 left = 0;
             } else {
                 left = prefixSum[i - 1];
             }
-            long right = prefixSum[N - 1] - prefixSum[i];
+            if(i == N-1){
+                right = 0;
+            }else{
+                right = prefixSum[N - 1] - prefixSum[i];
+            }
             if (left == right) {
-                System.out.println("Equilibrium: " + left);
                 count = count + 1;
             }
         }

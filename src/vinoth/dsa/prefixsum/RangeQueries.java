@@ -8,11 +8,12 @@ import java.util.Arrays;
 public class RangeQueries {
 
     public static void main(String[] args) {
-        int[] arr = {-3, 6, 2, 4, 7, 8, 5};
-        int[][] query = {{1, 2}, {3, 4}, {1, 5}};
+        int[] arr = {7, 3, 1, 5, 5, 5, 1, 2, 4, 5};
+        int[][] query = {{6, 9}, {2, 9}, {2, 4}, {0, 9}};
         long[] rangeSumBruteforce = rangeSumBruteforce(arr, query);
         long[] rangeSumOptimised = rangeSumOptimised(arr, query);
         Arrays.stream(rangeSumBruteforce).boxed().forEach(System.out::println);
+        System.out.println("******");
         Arrays.stream(rangeSumOptimised).boxed().forEach(System.out::println);
     }
 
@@ -39,7 +40,7 @@ public class RangeQueries {
             int start = query[i][0];
             int end = query[i][1];
             if (start == 0) {
-                sums[i] = prefixSum[end] - prefixSum[start];
+                sums[i] = prefixSum[end];
             } else {
                 sums[i] = prefixSum[end] - prefixSum[start - 1];
             }
