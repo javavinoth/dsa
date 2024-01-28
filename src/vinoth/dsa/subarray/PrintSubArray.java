@@ -13,10 +13,10 @@ public class PrintSubArray {
 //        System.out.println();
 //        printSubArrayWithLength(arr, start, length);
 //        printAllSubArray(arr);
-//        printSumOfAllSubArray(arr);
-        System.out.println("***********");
+        printSumOfAllSubArray(arr);
+//        System.out.println("***********");
 //        printSumOfAllSubArrayOptimised(arr);
-        maxSubArraySum(arr);
+//        maxSubArraySum(arr);
         maxSubArraySumWithPrefix(arr);
     }
 
@@ -51,6 +51,7 @@ public class PrintSubArray {
             for (int end = start; end < N; end++) {
                 int sum = 0;
                 for (int i = start; i <= end; i++) {
+                    System.out.print(arr[i]+" ");
                     sum = sum + arr[i];
                 }
                 System.out.println("sum " + sum);
@@ -106,6 +107,6 @@ public class PrintSubArray {
                 }
             }
         }
-        System.out.println("max " + max);
+//        System.out.println("max " + max);
     }
 }

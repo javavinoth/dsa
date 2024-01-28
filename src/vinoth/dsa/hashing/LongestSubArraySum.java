@@ -19,7 +19,9 @@ public class LongestSubArraySum {
 
             }
             if (sum == ZERO) {
-//                MAX = end;
+                MAX = 0;
+            } else {
+                MAX = sum;
             }
         }
         return MAX;
