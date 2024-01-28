@@ -19,6 +19,18 @@ public class MaximumSubarray {
         return max;
     }
 
+    public static int subArraySumBruteForce2(int[] arr) {
+        int max = Integer.MIN_VALUE;
+        for (int start = 0; start < arr.length; start++) {
+            int sum = 0;
+            for (int end = start; end < arr.length; end++) {
+                sum = sum + arr[end];
+                max = Math.max(max, sum);
+            }
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         int[] arr = {-2, -1};
         System.out.println(subArraySumBruteForce(arr));
