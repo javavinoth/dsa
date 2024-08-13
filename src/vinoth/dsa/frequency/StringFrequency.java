@@ -5,6 +5,25 @@ import java.util.Map;
 import java.util.Set;
 
 public class StringFrequency {
+    public static int singleNumber(int[] nums) {
+        Map<Integer, Integer> single = new HashMap<>();
+        for (int i : nums) {
+            if (single.containsKey(i)) {
+                Integer value = single.get(i);
+                value = value + 1;
+                single.put(i, value);
+
+            } else {
+                single.put(i, 1);
+            }
+        }
+        for (Map.Entry<Integer, Integer> entry : single.entrySet()) {
+            if (entry.getValue() % 2 != 0) {
+                return entry.getKey();
+            }
+        }
+        return 0;
+    }
 
     private static Character frequency(String input) {
         char[] chars = input.toCharArray();
@@ -47,6 +66,8 @@ public class StringFrequency {
     }
 
     public static void main(String[] args) {
-        frequency("aabcd");
+        int[] nums = {4, 1, 2, 1, 2};
+        System.out.println(singleNumber(nums));
+//        frequency("aabcd");
     }
 }

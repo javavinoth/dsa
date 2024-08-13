@@ -1,6 +1,12 @@
 package vinoth.dsa.array;
 
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /*
 https://takeuforward.org/data-structure/find-second-smallest-and-second-largest-element-in-an-array/
  */
@@ -56,7 +62,35 @@ public class SecondSmallestAndLargestElement {
         String on = "one";
         System.out.println(one.equals(one1));
         System.out.println(one == one1);
-        int[] arr = {1, 2, 4, 7, 7, 5};
+        int[] arr = {10, -2, 4, 7, 700, 5};
         System.out.println(thirdLargest(arr));
+        System.out.println(largestNumber(arr, 3));
+        System.out.println(smallestNumber(arr, 3));
+    }
+
+    public static int largestNumber(int[] arr, int k) {
+        Set<Integer> collect = Arrays.stream(arr).boxed().collect(Collectors.toSet());
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(k);
+
+        for (Integer num : collect) {
+            minHeap.offer(num);
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+        return minHeap.peek();
+    }
+
+    public static int smallestNumber(int[] arr, int k) {
+        Set<Integer> collect = Arrays.stream(arr).boxed().collect(Collectors.toSet());
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(k, Collections.reverseOrder());
+
+        for (Integer num : collect) {
+            minHeap.offer(num);
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+        return minHeap.peek();
     }
 }

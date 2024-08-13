@@ -3,10 +3,14 @@ package vinoth.dsa.array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class RotateArray {
+
+    public static void rotate(int[] arr) {
+        int last = arr[arr.length - 1];
+        System.arraycopy(arr, 0, arr, 1, arr.length - 1);
+        arr[0] = last;
+    }
 
     public static int[] leftRotate(int[] arr, int k) {
         int length = arr.length - 1;
@@ -77,14 +81,16 @@ public class RotateArray {
 //        System.out.println("******");
         int[] arr = {1, 2, 3, 4, 5, 6, 7, 7};
         int[] arr1 = {8, 9};
-        Set<Integer> collect = Arrays.stream(arr).boxed().collect(Collectors.toSet());
-        Set<Integer> collect1 = Arrays.stream(arr1).boxed().collect(Collectors.toSet());
-        collect.addAll(collect1);
-        collect.stream().toList();
-        Arrays.stream(leftRotate(arr, 3)).forEach(System.out::print);
-//        rotateLeft(arr, 3);
-//        Arrays.stream(arr).forEach(System.out::print);
-        System.out.println("******");
+        rotate(arr1);
+        Arrays.stream(arr1).forEach(System.out::println);
+//        Set<Integer> collect = Arrays.stream(arr).boxed().collect(Collectors.toSet());
+//        Set<Integer> collect1 = Arrays.stream(arr1).boxed().collect(Collectors.toSet());
+//        collect.addAll(collect1);
+//        collect.stream().toList();
+//        Arrays.stream(leftRotate(arr, 3)).forEach(System.out::print);
+////        rotateLeft(arr, 3);
+////        Arrays.stream(arr).forEach(System.out::print);
+//        System.out.println("******");
 //        Arrays.stream(rightRotate(arr, 3)).forEach(System.out::print);
     }
 }
